@@ -1,4 +1,4 @@
-# relationship_app/views.py
+# relationship_app/list_books.html
 
 from django.shortcuts import render
 from .models import Book
