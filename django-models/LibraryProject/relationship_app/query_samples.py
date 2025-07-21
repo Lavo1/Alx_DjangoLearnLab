@@ -1,28 +1,32 @@
-from django.db import models
+from relationship_app.models import Author, Book, Library, Librarian
 
-class Author(models.Model):
-    name = models.CharField(max_length=100)
+# 1. Query all books by a specific author (replace author_name as needed)
+def books_by_author(author_name):
+    try:
+        author = Author.objects.get(name=author_name)
+        return author.books.all()
+    except Author.DoesNotExist:
+        return []
 
-    def __str__(self):
-        return self.name
+# 2. List all books in a library (replace library_name as needed)
+def books_in_library(library_name):
+    try:
+        library = Library.objects.get(name=library_name)
+        return library.books.all()
+    except Library.DoesNotExist:
+        return []
 
-class Book(models.Model):
-    title = models.CharField(max_length=200)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='books')
+# 3. Retrieve the librarian for a library (replace library_name as needed)
+def librarian_for_library(library_name):
+    try:
+        library = Library.objects.get(name=library_name)
+        return library.librarian
+    except (Library.DoesNotExist, Librarian.DoesNotExist):
+        return None
 
-    def __str__(self):
-        return self.title
-
-class Library(models.Model):
-    name = models.CharField(max_length=100)
-    books = models.ManyToManyField(Book, related_name='libraries')
-
-    def __str__(self):
-        return self.name
-
-class Librarian(models.Model):
-    name = models.CharField(max_length=100)
-    library = models.OneToOneField(Library, on_delete=models.CASCADE, related_name='librarian')
-
-    def __str__(self):
-        return self.name
+# Example usage (if running in Django shell or with proper Django context):
+if __name__ == '__main__':
+    # Replace 'Alice' and 'Central Library' with actual values in your database
+    print("Books by Alice:", list(books_by_author('Alice')))
+    print("Books in Central Library:", list(books_in_library('Central Library')))
+    print("Librarian for Central Library:", librarian_for_library('Central Library'))
