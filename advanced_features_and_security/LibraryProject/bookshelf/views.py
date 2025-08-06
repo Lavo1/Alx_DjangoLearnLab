@@ -35,3 +35,11 @@ def book_delete(request, pk):
     book = get_object_or_404(Book, pk=pk)
     book.delete()
     return redirect('book_list')
+
+user = CustomUser.objects.get(id=user_id)
+
+form = SearchForm(request.GET)
+if form.is_valid():
+    query = form.cleaned_data['query']
+    results = Book.objects.filter(title__icontains=query)
+
