@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-0ju4i2f^lilzor_v5)cp#9vx6x+yp1qs-d1&c-%1m61-oz%%c1
 DEBUG = True
 
 # settings.py
-AUTH_USER_MODEL = 'accounts.CustomUser'
+AUTH_USER_MODEL = 'bookshelf.CustomUser'
 
 
 ALLOWED_HOSTS = []
@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bookshelf',
     'relationship_app',
-    'accounts',
 ]
 
 MIDDLEWARE = [
