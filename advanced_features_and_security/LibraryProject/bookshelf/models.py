@@ -8,6 +8,28 @@ class Book(models.Model):
     def __str__(self):
         return f"{self.title} by {self.author} ({self.publication_year})"
 
+    class Meta:
+        permissions = [
+            ("can_view", "Can view book"),
+            ("can_create", "Can create book"),
+            ("can_edit", "Can edit book"),
+            ("can_delete", "Can delete book"),
+        ]
+
+    def __str__(self):
+        return self.title
+        return self.title
+
+"""
+Permissions Guide:
+- This model includes custom permissions: can_view, can_create, can_edit, can_delete.
+- Groups should be created in the Django admin with these permissions assigned:
+    - Viewers: can_view
+    - Editors: can_view, can_create, can_edit
+    - Admins: All permissions
+"""
+
+
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 
