@@ -31,6 +31,9 @@ AUTH_USER_MODEL = 'bookshelf.CustomUser'
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
+# === SECURE HEADERS ===
+# Trust the X-Forwarded-Proto header set by your proxy to determine if the request is secure
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Enable browser's XSS filtering
 SECURE_BROWSER_XSS_FILTER = True
 
