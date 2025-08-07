@@ -37,12 +37,23 @@ SECURE_BROWSER_XSS_FILTER = True
 # Prevent MIME-type sniffing
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
-# Prevent clickjacking
+# Prevent clickjacking by disallowing framing
 X_FRAME_OPTIONS = 'DENY'
 
-# Ensure cookies are only sent over HTTPS
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+# Redirect all HTTP requests to HTTPS
+SECURE_SSL_REDIRECT = True  # Ensures all traffic is forced over HTTPS
+
+SECURE_BROWSER_XSS_FILTER = True    # Enable browser's XSS filter
+
+# HTTP Strict Transport Security (HSTS)
+SECURE_HSTS_SECONDS = 31536000  # Enforce HTTPS for one year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS to all subdomains
+SECURE_HSTS_PRELOAD = True  # Allow site to be included in browser preload lists
+
+# Ensures cookies are transmitted securely and not exposed over HTTP
+SESSION_COOKIE_SECURE = True  # Session cookies only over HTTPS
+CSRF_COOKIE_SECURE = True     # CSRF cookies only over HTTPS
+
 
 # Application definition
 
