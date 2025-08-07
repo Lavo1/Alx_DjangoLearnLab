@@ -29,14 +29,18 @@ DEBUG = False
 AUTH_USER_MODEL = 'bookshelf.CustomUser'
 
 
-ALLOWED_HOSTS = ['yourdomain.com', 'www.yourdomain.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
-# Extra browser-side protections
+# Enable browser's XSS filtering
 SECURE_BROWSER_XSS_FILTER = True
-X_FRAME_OPTIONS = 'DENY'
+
+# Prevent MIME-type sniffing
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
-# Force cookies to use HTTPS (only works when you're serving with HTTPS)
+# Prevent clickjacking
+X_FRAME_OPTIONS = 'DENY'
+
+# Ensure cookies are only sent over HTTPS
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
