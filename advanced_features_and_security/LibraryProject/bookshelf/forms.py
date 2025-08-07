@@ -21,3 +21,6 @@ class BookForm(forms.ModelForm):
         if not isbn.isdigit():
             raise ValidationError("ISBN must only contain numbers.")
         return isbn
+        
+class ExampleForm(forms.Form):
+    example_field = forms.CharField(label='Example Field', max_length=100)
