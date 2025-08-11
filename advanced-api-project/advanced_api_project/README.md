@@ -9,3 +9,16 @@ Permissions:
 - Anyone can view books.
 - Only authenticated users can create, update, or delete books.
 
+## API Query Capabilities
+
+### Filtering
+- `/api/books/?author=Alice`
+- `/api/books/?publication_year=2023`
+
+### Searching
+- `/api/books/?search=Django`
+
+### Ordering
+- `/api/books/?ordering=title`
+- `/api/books/?ordering=-publication_year`
+
