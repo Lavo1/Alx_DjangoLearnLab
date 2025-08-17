@@ -7,6 +7,22 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post, Comment
+from django.db.models import Q
+
+class PostSearchView(ListView):
+    model = Post
+    template_name = 'blog/post_search.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query:
+            return Post.objects.filter(
+                Q(title__icontains=query) |
+                Q(content__icontains=query) |
+                Q(tags__name__icontains=query)
+            ).distinct()
+        return Post.objects.none()
 
 def register(request):
     if request.method == "POST":
