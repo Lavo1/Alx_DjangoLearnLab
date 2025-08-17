@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^#&(ur2r#vs@4!tzyimkve96%7j)-7%$(g41&j$ut)10808v1h'
+SECRET_KEY = 'django-insecure-(^3#r-ed@ub&ba$cph%gv!#j8tbtj$g!4odc4n9^sa3yg61^ev'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -73,15 +73,14 @@ WSGI_APPLICATION = 'django_blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'django_blog_db',       
-        'USER': 'blog_user',            
+        'NAME': 'django_blog_db',
+        'USER': 'blog_user',
         'PASSWORD': 'strongpassword123',
-        'HOST': 'localhost',            
-        'PORT': '5432',                 
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -122,11 +121,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
