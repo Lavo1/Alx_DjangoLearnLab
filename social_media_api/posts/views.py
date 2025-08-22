@@ -45,13 +45,18 @@ def feed(request):
     serializer = PostSerializer(posts, many=True)
     return Response(serializer.data)
 
+from rest_framework import generics, status
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from .models import Post, Like
+from notifications.models import Notification
+from django.contrib.contenttypes.models import ContentType
+
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def like_post(request, pk):
-    try:
-        post = Post.objects.get(pk=pk)
-    except Post.DoesNotExist:
-        return Response({"error": "Post not found"}, status=status.HTTP_404_NOT_FOUND)
+    post = generics.get_object_or_404(Post, pk=pk)  
 
     like, created = Like.objects.get_or_create(user=request.user, post=post)
     if not created:
@@ -74,10 +79,7 @@ def like_post(request, pk):
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def unlike_post(request, pk):
-    try:
-        post = Post.objects.get(pk=pk)
-    except Post.DoesNotExist:
-        return Response({"error": "Post not found"}, status=status.HTTP_404_NOT_FOUND)
+    post = generics.get_object_or_404(Post, pk=pk) 
 
     try:
         like = Like.objects.get(user=request.user, post=post)
@@ -85,4 +87,3 @@ def unlike_post(request, pk):
         return Response({"message": "Post unliked"}, status=status.HTTP_200_OK)
     except Like.DoesNotExist:
         return Response({"error": "You have not liked this post"}, status=status.HTTP_400_BAD_REQUEST)
-
